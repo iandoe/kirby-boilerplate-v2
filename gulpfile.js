@@ -14,7 +14,7 @@ gulp.task('watch', ['browser-sync'], function() {
     gulp.watch('assets/sass/**/*.scss', ['css']);
     gulp.watch(['assets/js/main.js', 'assets/js/modules/*.js'], ['js']);
     gulp.watch('assets/js/libs/*.js', ['jsplugins']);
-    gulp.watch('assets/svg/sprites/*.svg', ['svgstore']);
+    gulp.watch('assets/svg/**/*.svg', ['svgo']);
 });
 
 // browser-sync task for starting the server.
@@ -26,10 +26,12 @@ gulp.task('browser-sync', function() {
         domainName = dirname + ".loc";
 
     browserSync({
-        proxy: domainName
+        proxy: domainName,
+        open: false
     });
 });
 
+// SCSS -> CSS (autoprefix & stuff)
 gulp.task('css', function() {
     return gulp.src('assets/sass/style.scss')
         .pipe(plugins.plumber())
@@ -60,6 +62,7 @@ gulp.task('css', function() {
     }))
 });
 
+// Concatenate + uglify main.js and it's modules
 gulp.task('js', function() {
     return gulp.src('assets/js/main.js')
         .pipe(plugins.plumber())
@@ -74,6 +77,7 @@ gulp.task('js', function() {
 
 });
 
+// Concatenate + uglify js libs in plugins.min.js
 gulp.task('jsplugins', function() {
     return gulp.src('assets/js/libs/*.js')
         .pipe(plugins.plumber())
@@ -84,6 +88,7 @@ gulp.task('jsplugins', function() {
         .pipe(plugins.notify("JS Plugins Compiled"))
 });
 
+// Create an SVG sprite
 gulp.task('svgstore', function() {
     return gulp.src('assets/svg/src/*.svg')
         .pipe(plugins.svgmin())
@@ -105,6 +110,7 @@ gulp.task('svgstore', function() {
         }))
 });
 
+// Optimize Images
 gulp.task('imagemin', function() {
     return gulp.src('assets/img/src/*')
     .pipe(
@@ -119,6 +125,17 @@ gulp.task('imagemin', function() {
     .pipe(gulp.dest('assets/img'))
     .pipe(plugins.notify({
         message: "Images Compressed",
+        onLast: true
+    }))
+});
+
+// Optimize SVGs
+gulp.task('svgo', function() {
+    return gulp.src('assets/svg/*.svg')
+    .pipe(plugins.svgmin())
+    .pipe(gulp.dest('assets/svg'))
+    .pipe(plugins.notify({
+        message: "SVGs Optimized",
         onLast: true
     }))
 });
