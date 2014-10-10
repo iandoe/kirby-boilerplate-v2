@@ -9,8 +9,6 @@
 
     <hr>
 
-    <?php snippet('projects') ?>
-
   </main>
 
 <?php snippet('footer') ?>

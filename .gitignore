@@ -1,4 +1,11 @@
 .DS_Store
-/site/accounts
-/assets/avatars
-/thumbs/*
+.sass-cache/
+node_modules/
+site/accounts
+assets/avatars
+assets/css
+assets/img
+!assets/img/src
+thumbs/*
+**/*.min.*
+npm-debug.log

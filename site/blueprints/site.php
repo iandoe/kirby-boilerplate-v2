@@ -4,17 +4,18 @@ title: Site
 pages: default
 fields:
   title:
-    label: Title
-    type:  text
-  author:
-    label: Author
+    label: Titre
     type:  text
   description:
-    label: Description
+    label: Description (SEO)
     type:  textarea
   keywords:
-    label: Keywords
+    label: Mot-clés (SEO)
     type:  tags
+  ga:
+    label: Google Analytics
+    placeholder: UA-XXXXX-X
+    type: text
   copyright:
     label: Copyright
     type:  textarea

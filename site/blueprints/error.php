@@ -1,13 +1,13 @@
 <?php if(!defined('KIRBY')) exit ?>
 
-title: Error
+title: Page Erreur
 pages: false
 files: false
 fields:
   title:
-    label: Title
+    label: Titre
     type:  text
   text:
-    label: Text
+    label: Contenu
     type:  textarea
     size:  large

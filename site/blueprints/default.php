@@ -1,12 +1,12 @@
 <?php if(!defined('KIRBY')) exit ?>
 
-title: Page
+title: Page par défaut
 pages: true
 files: true
 fields:
   title:
-    label: Title
+    label: Titre
     type:  text
   text:
-    label: Text
+    label: Contenu
     type:  textarea
