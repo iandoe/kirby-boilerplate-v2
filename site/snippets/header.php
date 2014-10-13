@@ -18,6 +18,14 @@
 	<!-- CSS Assets -->
 	<?php echo css('assets/css/main.min.css') ?>
 
+	<script src="<?php echo url('/assets/js/dist/LAB.min.js') ?>" async onload='
+	 $LAB
+	    .script("//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").wait()
+	    .script("<?php echo url('assets/js/plugins.min.js') ?>").wait()
+	    .script("<?php echo url('assets/js/main.min.js') ?>")
+	    '>
+	</script>
+
 </head>
 
 <!-- Body -->
