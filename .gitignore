@@ -7,5 +7,5 @@ assets/css
 assets/img
 !assets/img/src
 thumbs/*
-**/*.min.*
+assets/js/*.min.*
 npm-debug.log

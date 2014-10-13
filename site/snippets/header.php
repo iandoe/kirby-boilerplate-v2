@@ -18,6 +18,7 @@
 	<!-- CSS Assets -->
 	<?php echo css('assets/css/main.min.css') ?>
 
+	<!-- JS Assets async loading -->
 	<script src="<?php echo url('/assets/js/dist/LAB.min.js') ?>" async onload='
 	 $LAB
 	    .script("//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").wait()
