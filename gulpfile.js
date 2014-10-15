@@ -1,141 +1,20 @@
-var gulp = require('gulp'),
-    fs = require('fs'),
-    moment = require('moment'),
-    pkg = require('./package.json'),
-    plugins = require('gulp-load-plugins')({camelize: true}),
-    browserSync = require('browser-sync'),
-    reload = browserSync.reload;
+/*
+  gulpfile.js
+  ===========
+  Rather than manage one giant configuration file responsible
+  for creating multiple tasks, each task has been broken out into
+  its own file in gulp/tasks. Any files in that directory get
+  automatically required below.
 
-var env = process.env.NODE_ENV;
+  To add a new task, simply add a new task file that directory.
+  gulp/tasks/default.js specifies the default set of tasks to run
+  when you run `gulp`.
+*/
 
-var banner = fs.readFileSync('build/banner.js');
+var requireDir = require('require-dir');
 
-gulp.task('watch', ['browser-sync'], function() {
-    gulp.watch('assets/sass/**/*.scss', ['css']);
-    gulp.watch(['assets/js/main.js', 'assets/js/modules/*.js'], ['js']);
-    gulp.watch('assets/js/libs/*.js', ['jsplugins']);
-    gulp.watch('assets/svg/**/*.svg', ['svgo']);
-});
+// Setup global variables (auto load gulp plugins)
+global.plugins = require('gulp-load-plugins')({camelize: true});
 
-// browser-sync task for starting the server.
-gulp.task('browser-sync', function() {
-
-    // Use current dirname + .loc to determine the domainName
-    var pathArray = __dirname.split('/'),
-        dirname = pathArray[pathArray.length-1],
-        domainName = dirname + ".loc";
-
-    browserSync({
-        proxy: domainName,
-        open: false
-    });
-});
-
-// SCSS -> CSS (autoprefix & stuff)
-gulp.task('css', function() {
-    return gulp.src('assets/sass/style.scss')
-        .pipe(plugins.plumber())
-        .pipe(plugins.sass({
-            imagePath: '/assets/img/'
-        }))
-        .on("error", plugins.notify.onError({
-            title: "Error with SASS"
-        }))
-        .pipe(plugins.autoprefixer(
-            "last 2 versions", "> 1%", "ie 9", "ie 8"
-        ))
-        .pipe(plugins.minifyCss({
-            keepSpecialComments: 0,
-            removeEmpty: true
-        }))
-        .pipe(plugins.rename({suffix: '.min'}))
-        .pipe(plugins.header(banner, {
-            date: moment().format('Do MMMM YYYY, HH:mm')
-        }))
-        .pipe(gulp.dest('assets/css'))
-        // .pipe(plugins.livereload(server))
-        .pipe(reload({stream:true}))
-        .pipe(plugins.notify({
-            title: pkg.name,
-            message: "CSS Succesfully Compiled",
-            activate: "com.google.Chrome"
-    }))
-});
-
-// Concatenate + uglify main.js and it's modules
-gulp.task('js', function() {
-    return gulp.src('assets/js/main.js')
-        .pipe(plugins.plumber())
-        .pipe(plugins.imports())
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename({suffix: '.min'}))
-        .pipe(plugins.header(banner, {
-            date: moment().format('Do MMMM YYYY, HH:mm')
-        }))
-        .pipe(gulp.dest('assets/js'))
-        .pipe(reload({stream:true, once: true}))
-
-});
-
-// Concatenate + uglify js libs in plugins.min.js
-gulp.task('jsplugins', function() {
-    return gulp.src('assets/js/libs/*.js')
-        .pipe(plugins.plumber())
-        .pipe(plugins.concat("plugins.js"))
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename({suffix: '.min'}))
-        .pipe(gulp.dest('assets/js'))
-        .pipe(plugins.notify("JS Plugins Compiled"))
-});
-
-// Create an SVG sprite
-gulp.task('svgstore', function() {
-    return gulp.src('assets/svg/src/*.svg')
-        .pipe(plugins.svgmin())
-        .pipe(plugins.svgstore({
-            fileName: 'sprites.svg',
-            prefix: 'icon-',
-            inlineSvg: true,
-            transformSvg: function (svg, cb) {
-                svg.find('//*[@fill]').forEach(function (child) {
-                  child.attr('fill').remove()
-                })
-                cb(null)
-            }
-        }))
-        .pipe(gulp.dest('assets/svg'))
-        .pipe(plugins.notify({
-            message: "SVG Optim + Sprite done",
-            onLast: true
-        }))
-});
-
-// Optimize Images
-gulp.task('imagemin', function() {
-    return gulp.src('assets/img/src/*')
-    .pipe(
-        plugins.cache(
-        plugins.imagemin({
-            optimizationLevel: 5,
-            progressive: false,
-            interlaced: true
-        })
-        )
-    )
-    .pipe(gulp.dest('assets/img'))
-    .pipe(plugins.notify({
-        message: "Images Compressed",
-        onLast: true
-    }))
-});
-
-// Optimize SVGs
-gulp.task('svgo', function() {
-    return gulp.src('assets/svg/*.svg')
-    .pipe(plugins.svgmin())
-    .pipe(gulp.dest('assets/svg'))
-    .pipe(plugins.notify({
-        message: "SVGs Optimized",
-        onLast: true
-    }))
-});
+// Require all tasks in gulp/tasks, including subfolders
+requireDir('./gulp/tasks', { recurse: true });
