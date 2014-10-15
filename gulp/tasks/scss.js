@@ -7,9 +7,11 @@
 
  var  gulp         = require('gulp'),
       reload       = require('browser-sync').reload,
+      argv         = require('yargs').argv,
       moment       = require('moment'),
       fs           = require('fs'),
       banner       = fs.readFileSync('gulp/banner.js'),
+      assets       = require('../config').assets,
       config       = require('../config').scss,
       errorHandler = require('../util/errorHandler');
 
@@ -18,7 +20,9 @@ gulp.task('scss', function() {
     return gulp.src(config.src)
 
         .pipe(plugins.sass({
-            imagePath: '/assets/img/'
+            // if task is launched with parameter --subdir,
+            // change the image-url helper to reflect this
+            imagePath: (argv.subdir) ? '/' + argv.subdir + '/' + assets.img : '/' + assets.img
         }))
         .on('error', errorHandler)
         .pipe(plugins.autoprefixer(

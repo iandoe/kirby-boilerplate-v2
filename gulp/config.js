@@ -3,6 +3,15 @@ var assets = 'assets/',
 
 module.exports = {
 
+  assets: {
+    sass:   assets + 'sass',
+    css:    assets + 'css',
+    js:     assets + 'js',
+    img:    assets + 'img',
+    svg:    assets + 'svg',
+    fonts:  assets + 'fonts'
+  },
+
   watch: {
     scss: assets + 'sass/**/*.scss',
     js: [
