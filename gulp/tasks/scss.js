@@ -24,7 +24,9 @@ gulp.task('scss', function() {
             // change the image-url helper to reflect this
             imagePath: (argv.subdir) ? '/' + argv.subdir + '/' + assets.img : '/' + assets.img
         }))
+
         .on('error', errorHandler)
+
         .pipe(plugins.autoprefixer(
             "last 2 versions", "> 1%", "ie 9", "ie 8"
         ))

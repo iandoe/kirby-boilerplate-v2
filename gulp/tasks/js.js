@@ -13,7 +13,9 @@
       errorHandler = require('../util/errorHandler');
 
 gulp.task('js', function() {
+
   return gulp.src(config.src)
+
   .pipe(plugins.imports())
   .pipe(plugins.uglify())
   .pipe(plugins.rename({suffix: '.min'}))
