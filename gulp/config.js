@@ -18,7 +18,7 @@ module.exports = {
       assets + '/js/main.js',
       assets + '/js/modules/*.js'
     ],
-    jsplugins: assets + 'js/libs/*.js',
+    img: assets + 'img/*',
     svgo: assets + 'svg/**/*.svg'
   },
 
@@ -33,12 +33,9 @@ module.exports = {
 
   js: {
     src: assets + 'js/main.js',
-    dest: assets + 'js'
-  },
+    dest: assets + 'js',
 
-  jsplugins: {
-    src: assets + 'js/libs/*.js',
-    dest: assets + 'js'
+    debug: true
   },
 
   imagemin: {

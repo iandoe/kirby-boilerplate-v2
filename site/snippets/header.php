@@ -16,13 +16,12 @@
 	<meta name="keywords" content="<?php echo $site->keywords()->html() ?>">
 
 	<!-- CSS Assets -->
-	<?php echo css('assets/css/main.min.css') ?>
+	<?php echo css('assets/css/style.min.css') ?>
 
 	<!-- JS Assets async loading -->
 	<script src="<?php echo url('/assets/js/dist/LAB.min.js') ?>" async onload='
 	 $LAB
 	    .script("//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").wait()
-	    .script("<?php echo url('assets/js/plugins.min.js') ?>").wait()
 	    .script("<?php echo url('assets/js/main.min.js') ?>")
 	    '>
 	</script>

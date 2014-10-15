@@ -1,10 +1,12 @@
 /**
- * Compiles main.js
+ * Compiles main.js (using Browserify)
  * to minified js as main.min.js
  * - Banner
  */
 
  var  gulp         = require('gulp'),
+      browserify   = require('browserify'),
+      source       = require('vinyl-source-stream'),
       reload       = require('browser-sync').reload,
       moment       = require('moment'),
       fs           = require('fs'),
@@ -14,20 +16,28 @@
 
 gulp.task('js', function() {
 
-  return gulp.src(config.src)
+  return browserify({
+    entries: './assets/js/main.js',
+    debug: ENV !== 'prod'
+  }).bundle()
 
-  .pipe(plugins.imports())
-  .pipe(plugins.uglify())
-  .pipe(plugins.rename({suffix: '.min'}))
-  .pipe(plugins.header(banner, {
-    date: moment().format('Do MMMM YYYY, HH:mm')
-  }))
+    .on('error', errorHandler)
 
-  // Error Handling
-  .on('error', errorHandler)
+    .pipe(source('main.min.js'))
+    .pipe(
+      plugins.if(ENV === 'prod',
+        plugins.streamify(
+          plugins.uglify()
+        )
+      )
+    )
 
-  .pipe(gulp.dest(config.dest))
+    .pipe(plugins.header(banner, {
+        date: moment().format('Do MMMM YYYY, HH:mm')
+    }))
 
-  // Browser Sync Reload
-  .pipe(reload({stream:true, once: true}))
+    .pipe(gulp.dest(config.dest))
+
+    // Browser Sync Reload
+    .pipe(reload({stream:true, once: true}))
 });
