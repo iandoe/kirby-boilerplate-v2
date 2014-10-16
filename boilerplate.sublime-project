@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"folder_exclude_patterns": ["node_modules", "thumbs", "panel", "kirby"],
+			"path": "."
+		}
+	],
+	"build_systems": [
+		{
+			"name": "Gulp",
+			"shell_cmd": "gulp --no-color"
+		}
+	]
+}
