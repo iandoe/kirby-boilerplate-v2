@@ -17,6 +17,7 @@ gulp.task('svgstore', ['svgo'], function() {
             prefix: 'icon-',
             inlineSvg: true,
             transformSvg: function (svg, cb) {
+                svg.attr('style', 'display:none');
                 svg.find('//*[@fill]').forEach(function (child) {
                   child.attr('fill').remove()
                 })
