@@ -16,12 +16,10 @@ gulp.task('svgstore', ['svgo'], function() {
             fileName: 'sprites.svg',
             prefix: 'icon-',
             inlineSvg: true,
-            transformSvg: function (svg, cb) {
+            transformSvg: function (svg, done) {
                 svg.attr('style', 'display:none');
-                svg.find('//*[@fill]').forEach(function (child) {
-                  child.attr('fill').remove()
-                })
-                cb(null)
+                svg.find('[fill]').removeAttr('fill');
+                done(null, svg);
             }
         }))
 
