@@ -1,5 +1,5 @@
 var assets = 'assets/',
-    site   = 'site/'
+    site   = 'site/';
 
 module.exports = {
 
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   browserSync: {
-    domain: '.loc',
+    domain: '.dev'
   },
 
   scss: {
@@ -55,6 +55,6 @@ module.exports = {
   svgstore: {
     src: assets + 'svg/sprites/*.svg',
     dest: site + 'snippets'
-  },
+  }
 
 };
