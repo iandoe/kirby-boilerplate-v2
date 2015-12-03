@@ -10,7 +10,7 @@
 
 gulp.task('browserSync', function() {
 
-    // Use current dirname + .loc to determine the domainName
+    // Use current dirname + .dev to determine the domainName
     var pathArray = __dirname.split('/'),
     // Go up two dirs (-3)
     dirname = pathArray[pathArray.length-3],

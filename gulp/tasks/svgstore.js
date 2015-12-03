@@ -6,24 +6,22 @@
 
  var  gulp         = require('gulp'),
       config       = require('../config').svgstore,
+      cheerio      = require('gulp-cheerio'),
       errorHandler = require('../util/errorHandler');
 
 gulp.task('svgstore', ['svgo'], function() {
 
     return gulp.src(config.src)
-
-        .pipe(plugins.svgstore({
-            fileName: 'sprites.svg',
-            prefix: 'icon-',
-            inlineSvg: true,
-            transformSvg: function (svg, done) {
-                svg.attr('style', 'display:none');
-                svg.find('[fill]').removeAttr('fill');
-                done(null, svg);
-            }
+        .pipe(plumber(errorHandler))
+        .pipe(cheerio({
+          run: function ($) {
+            $('[fill]').removeAttr('fill');
+          },
+          parserOptions: { xmlMode: true }
         }))
-
-        .on('error', errorHandler)
-
+        .pipe(plugins.svgstore({ inlineSvg: true }))
+        .pipe(cheerio(function ($) {
+          $('svg').attr('style', 'display:none');
+        }))
         .pipe(gulp.dest(config.dest))
 });

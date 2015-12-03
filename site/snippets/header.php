@@ -9,20 +9,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Site Title -->
-	<title><?php echo $page->title()->html() ?> - <?php echo $site->title()->html() ?></title>
+	<title><?= $page->title()->html() ?> - <?= $site->title()->html() ?></title>
 	<!-- Site Desc -->
-	<meta name="description" content="<?php echo $site->description()->html() ?>">
+	<meta name="description" content="<?= $site->description()->html() ?>">
 	<!-- Site Keywords -->
-	<meta name="keywords" content="<?php echo $site->keywords()->html() ?>">
+	<meta name="keywords" content="<?= $site->keywords()->html() ?>">
 
 	<!-- CSS Assets -->
-	<?php echo css('assets/css/style.min.css') ?>
+	<?= css('assets/css/style.min.css') ?>
 
 	<!-- JS Assets async loading -->
-	<script src="<?php echo url('/assets/js/dist/LAB.min.js') ?>" async onload='
+	<script src="<?= url('/assets/js/dist/LAB.min.js') ?>" async onload='
 	 $LAB
 	    .script("//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").wait()
-	    .script("<?php echo url('assets/js/main.min.js') ?>")
+	    .script("<?= url('assets/js/main.min.js') ?>")
 	    '>
 	</script>
 

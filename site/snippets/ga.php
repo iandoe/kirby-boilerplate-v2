@@ -1,4 +1,6 @@
 
+<? if ($site->ga()): ?>
+
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -6,5 +8,7 @@
     e=o.createElement(i);r=o.getElementsByTagName(i)[0];
     e.src='https://www.google-analytics.com/analytics.js';
     r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create','<?php echo $site->ga() ?>','auto');ga('send','pageview');
+    ga('create','<?= $site->ga() ?>','auto');ga('send','pageview');
 </script>
+
+<? endif; ?>

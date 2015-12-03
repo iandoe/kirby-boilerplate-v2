@@ -18,20 +18,19 @@
 gulp.task('scss', function() {
 
     return gulp.src(config.src)
-
+        .pipe(plumber(errorHandler))
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.sass({
             // if task is launched with parameter --subdir,
             // change the image-url helper to reflect this
             imagePath: (argv.subdir) ? '/' + argv.subdir + '/' + assets.img : '/' + assets.img
         }))
-        .pipe(plugins.sourcemaps.write())
-
-        .on('error', errorHandler)
-
         .pipe(plugins.autoprefixer(
             "last 2 versions", "> 1%", "ie 9", "ie 8"
         ))
+        .pipe(plugins.sourcemaps.write())
+
+
         .pipe(plugins.if(ENV === 'prod',
           plugins.minifyCss({
             keepSpecialComments: 0,

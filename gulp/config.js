@@ -23,7 +23,7 @@ module.exports = {
   },
 
   browserSync: {
-    domain: '.loc',
+    domain: '.dev'
   },
 
   scss: {
@@ -53,8 +53,8 @@ module.exports = {
   },
 
   svgstore: {
-    src: assets + 'svg/sprites/*.svg',
-    dest: site + 'snippets'
-  },
+    src: assets + 'svg/sprites/**/*.svg',
+    dest: site + 'snippets/svg'
+  }
 
 };

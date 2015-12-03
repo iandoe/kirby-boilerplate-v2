@@ -15,6 +15,7 @@ var requireDir = require('require-dir');
 
 // Setup global variables (auto load gulp plugins)
 global.plugins = require('gulp-load-plugins')({camelize: true});
+global.plumber = require('gulp-plumber');
 global.ENV = process.env.NODE_ENV;
 
 // Require all tasks in gulp/tasks, including subfolders

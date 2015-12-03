@@ -10,10 +10,10 @@
 gulp.task('svgo', function() {
 
     return gulp.src(config.src)
+    .pipe(plumber(errorHandler))
 
     .pipe(plugins.svgmin())
 
-    .on('error', errorHandler)
 
     .pipe(gulp.dest(config.dest))
 });

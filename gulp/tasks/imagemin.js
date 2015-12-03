@@ -10,6 +10,7 @@
 gulp.task('imagemin', function() {
 
   return gulp.src(config.src)
+  .pipe(plumber(errorHandler))
   .pipe(
       plugins.cache(
       plugins.imagemin({
@@ -19,8 +20,5 @@ gulp.task('imagemin', function() {
       })
       )
   )
-
-  .on('error', errorHandler)
-
   .pipe(gulp.dest(config.dest))
 });

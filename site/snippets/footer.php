@@ -1,4 +1,4 @@
-<?php snippet("ga"); ?>
+<? snippet("ga"); ?>
 
 </body>
 

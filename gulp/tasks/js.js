@@ -21,7 +21,7 @@ gulp.task('js', function() {
     debug: ENV !== 'prod'
   }).bundle()
 
-    .on('error', errorHandler)
+    .pipe(plumber(errorHandler))
 
     .pipe(source('main.min.js'))
     .pipe(
