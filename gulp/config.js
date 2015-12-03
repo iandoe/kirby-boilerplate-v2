@@ -53,7 +53,7 @@ module.exports = {
   },
 
   svgstore: {
-    src: assets + 'svg/sprites/**/*.svg',
+    src: assets + 'svg/sprites',
     dest: site + 'snippets/svg'
   }
 
