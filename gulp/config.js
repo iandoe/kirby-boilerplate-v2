@@ -1,5 +1,5 @@
 var assets = 'assets/',
-    site   = 'site/'
+    site   = 'site/';
 
 module.exports = {
 
