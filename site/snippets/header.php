@@ -19,7 +19,7 @@
 	<?= css('assets/css/style.min.css') ?>
 
 	<!-- JS Assets async loading -->
-	<script src="<?= url('/assets/js/dist/LAB.min.js') ?>" async onload='
+	<script src="<?= url('/assets/js/libs/LAB.min.js') ?>" async onload='
 	 $LAB
 	    .script("//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").wait()
 	    .script("<?= url('assets/js/main.min.js') ?>")
