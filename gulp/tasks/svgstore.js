@@ -27,13 +27,14 @@ gulp.task('svgstore', ['svgo'], function() {
           .pipe(plumber(errorHandler))
           .pipe(cheerio({
             run: function ($) {
-              $('[fill]').removeAttr('fill');
+              $('svg[fill]').removeAttr('fill');
             },
             parserOptions: { xmlMode: true }
           }))
           .pipe(plugins.svgstore({ inlineSvg: true }))
           .pipe(cheerio(function ($) {
             $('svg').attr('style', 'display:none');
+            $('[fill]').attr('fill', null);
           }))
           .pipe(gulp.dest(config.dest))
     });

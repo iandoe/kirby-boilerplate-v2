@@ -5,7 +5,9 @@
  */
 
  var  gulp         = require('gulp'),
+      plumber      = require('gulp-plumber'),
       browserify   = require('browserify'),
+      header       = require('gulp-concat-util').header,
       source       = require('vinyl-source-stream'),
       reload       = require('browser-sync').reload,
       moment       = require('moment'),
@@ -20,9 +22,7 @@ gulp.task('js', function() {
     entries: './assets/js/main.js',
     debug: ENV !== 'prod'
   }).bundle()
-
     .pipe(plumber(errorHandler))
-
     .pipe(source('main.min.js'))
     .pipe(
       plugins.if(ENV === 'prod',
@@ -31,10 +31,11 @@ gulp.task('js', function() {
         )
       )
     )
+    .pipe(plugins.streamify(header(banner)))
 
-    .pipe(plugins.header(banner, {
-        date: moment().format('Do MMMM YYYY, HH:mm')
-    }))
+    // .pipe(plugins.header(banner, {
+    //     date: moment().format('Do MMMM YYYY, HH:mm')
+    // }))
 
     .pipe(gulp.dest(config.dest))
 

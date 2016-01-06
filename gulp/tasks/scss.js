@@ -6,6 +6,7 @@
  */
 
  var  gulp         = require('gulp'),
+      plumber      = require('gulp-plumber'),
       reload       = require('browser-sync').reload,
       argv         = require('yargs').argv,
       moment       = require('moment'),
@@ -28,8 +29,10 @@ gulp.task('scss', function() {
         .pipe(plugins.autoprefixer(
             "last 2 versions", "> 1%", "ie 9", "ie 8"
         ))
-        .pipe(plugins.sourcemaps.write())
 
+        .pipe(plugins.if(ENV !== 'prod',
+          plugins.sourcemaps.write()
+        ))
 
         .pipe(plugins.if(ENV === 'prod',
           plugins.minifyCss({
@@ -38,9 +41,7 @@ gulp.task('scss', function() {
           }))
         )
         .pipe(plugins.rename({suffix: '.min'}))
-        .pipe(plugins.header(banner, {
-            date: moment().format('Do MMMM YYYY, HH:mm')
-        }))
+        .pipe(plugins.header(banner))
 
         .pipe(gulp.dest(config.dest))
 

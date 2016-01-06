@@ -19,7 +19,8 @@ module.exports = {
       assets + '/js/modules/*.js'
     ],
     img: assets + 'img/*',
-    svgo: assets + 'svg/**/*.svg'
+    svgo: assets + 'svg/**/*.svg',
+    php: site + '**/*.php'
   },
 
   browserSync: {
