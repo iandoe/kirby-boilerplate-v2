@@ -34,8 +34,9 @@ gulp.task('svgstore', ['svgo'], function() {
           .pipe(plugins.svgstore({ inlineSvg: true }))
           .pipe(cheerio(function ($) {
             $('svg').attr('style', 'display:none');
-            $('[fill]').attr('fill', null);
+           $('[fill]').attr('fill', null);
           }))
+          .pipe(plugins.rename({ extname: '.php'}))
           .pipe(gulp.dest(config.dest))
     });
 

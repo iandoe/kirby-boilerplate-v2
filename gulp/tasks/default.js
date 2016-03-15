@@ -4,4 +4,4 @@
 
  var gulp = require('gulp');
 
-gulp.task('default', ['scss', 'js', 'svgo', 'imagemin'])
+gulp.task('default', ['scss', 'js:libs', 'js', 'svgo', 'imagemin']);

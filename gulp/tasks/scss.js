@@ -12,6 +12,7 @@
       moment       = require('moment'),
       fs           = require('fs'),
       banner       = fs.readFileSync('gulp/banner.js'),
+      bulkSass     = require('gulp-sass-bulk-import');
       assets       = require('../config').assets,
       config       = require('../config').scss,
       errorHandler = require('../util/errorHandler');
@@ -21,6 +22,7 @@ gulp.task('scss', function() {
     return gulp.src(config.src)
         .pipe(plumber(errorHandler))
         .pipe(plugins.sourcemaps.init())
+        .pipe(bulkSass())
         .pipe(plugins.sass({
             // if task is launched with parameter --subdir,
             // change the image-url helper to reflect this
