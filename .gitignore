@@ -8,5 +8,7 @@ assets/img/*
 !assets/img/src
 thumbs/*
 assets/js/*.min.*
+assets/js/dist
 npm-debug.log
+yarn.lock
 *.sublime-workspace

@@ -7,6 +7,7 @@
  var  gulp         = require('gulp'),
       plumber      = require('gulp-plumber'),
       browserify   = require('browserify'),
+      babelify     = require('babelify'),
       header       = require('gulp-concat-util').header,
       source       = require('vinyl-source-stream'),
       reload       = require('browser-sync').reload,
@@ -18,10 +19,11 @@
 
 gulp.task('js', function() {
 
-  return browserify({
-    entries: './assets/js/main.js',
-    debug: ENV !== 'prod'
-  }).bundle()
+  return browserify('./assets/js/main.js', {
+    debug: ENV !== 'prod',
+  })
+    .transform(babelify)
+    .bundle()
     .pipe(plumber(errorHandler))
     .pipe(source('main.min.js'))
     .pipe(

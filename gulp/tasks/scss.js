@@ -37,9 +37,8 @@ gulp.task('scss', function() {
         ))
 
         .pipe(plugins.if(ENV === 'prod',
-          plugins.minifyCss({
-            keepSpecialComments: 0,
-            removeEmpty: true
+          plugins.cleanCss({
+            keepSpecialComments: 0
           }))
         )
         .pipe(plugins.rename({suffix: '.min'}))
