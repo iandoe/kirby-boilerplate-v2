@@ -24,6 +24,10 @@ gulp.task('js', function() {
   })
     .transform(babelify)
     .bundle()
+    .on('error', function (err) {
+      console.log(err.toString());
+      this.emit('end');
+    })
     .pipe(plumber(errorHandler))
     .pipe(source('main.min.js'))
     .pipe(
